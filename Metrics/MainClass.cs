@@ -18,6 +18,7 @@ namespace Metrics
         public override string Author { get; } = "Killers0992";
         public override string Name { get; } = "Metrics";
         public override string Prefix { get; } = "metrics";
+        public override Version RequiredExiledVersion { get; } = new Version(3, 0, 0);
         public override Version Version { get; } = new Version(1, 0, 0);
         public override PluginPriority Priority => PluginPriority.Last;
 
@@ -35,7 +36,6 @@ namespace Metrics
 
         public override void OnEnabled()
         {
-            base.OnEnabled();
             List<PluginModel> plugins = new List<PluginModel>();
             foreach(var plugin in Loader.Plugins)
             {
@@ -58,6 +58,7 @@ namespace Metrics
                     Plugins = plugins
                 });
             });
+            base.OnEnabled();
         }
 
         public static async Task<bool> IssueMetrics(string endpoint, bool debug, MetricsModel model)
